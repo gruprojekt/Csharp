@@ -35,9 +35,23 @@ namespace Funkcje
         }
         private void calculate_Click(object sender, EventArgs e)
         {
-            double numberA = Convert.ToDouble(ValueA.Text);
-            double numberB = Convert.ToDouble(ValueB.Text);
-            double numberC = Convert.ToDouble(ValueC.Text);
+            chart1.Series["quadGraph"].Points.Clear();
+            double numberA = 0;
+            double numberB = 0;
+            double numberC = 0;
+            if (ValueA.Text != "")
+            {
+                numberA = Convert.ToDouble(ValueA.Text);
+            }
+            if (ValueB.Text != "")
+            {
+                numberB = Convert.ToDouble(ValueB.Text);
+            }
+            if (ValueC.Text != "")
+            {
+                numberC = Convert.ToDouble(ValueC.Text);
+            }
+
             double answer1 = quadCalculator1(numberA, numberB, numberC);
             double answer2 = quadCalculator2(numberA, numberB, numberC);
             //quadOutput.Text += answer1 + " OR " + answer2;
@@ -56,10 +70,19 @@ namespace Funkcje
             //    this.chart1.Series["quadGraph"].Points.AddXY(data[i, 0], data[i, 1]);
             //    label1.Text += data[i, 1].ToString();
             //}
-            double min = double.Parse(minText.Text);
-            double max = double.Parse(maxText.Text);
+            double min = -5;
+            double max = 5;
+            if (minText.Text != "")
+            {
+                min = double.Parse(minText.Text);
+            }
+            if (maxText.Text != "")
+            {
+                max = double.Parse(maxText.Text);
+            }
 
-            for (double i = min; i < max; i+=((max-min)/20))
+
+            for (double i = min; i <= max; i +=(max-min)/20)
             {
                 double pointX = i;
                 double pointY = GetY(numberA, numberB, numberC, pointX);
