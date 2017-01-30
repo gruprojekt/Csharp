@@ -16,7 +16,7 @@ namespace Funkcje
         {
             InitializeComponent();
         }
-
+        static double choose = 0;
         private void Form1_Load(object sender, EventArgs e)
         {
         }
@@ -35,59 +35,124 @@ namespace Funkcje
         }
         private void calculate_Click(object sender, EventArgs e)
         {
-            chart1.Series["quadGraph"].Points.Clear();
-            double numberA = 0;
-            double numberB = 0;
-            double numberC = 0;
-            if (ValueA.Text != "")
+            if (choose == 2)
             {
-                numberA = Convert.ToDouble(ValueA.Text);
+                chart1.Series["quadGraph"].Points.Clear();
+                double numberA = 0;
+                double numberB = 0;
+                double numberC = 0;
+                if (ValueA.Text != "")
+                {
+                    numberA = Convert.ToDouble(ValueA.Text);
+                }
+                if (ValueB.Text != "")
+                {
+                    numberB = Convert.ToDouble(ValueB.Text);
+                }
+                if (ValueC.Text != "")
+                {
+                    numberC = Convert.ToDouble(ValueC.Text);
+                }
+
+                double answer1 = quadCalculator1(numberA, numberB, numberC);
+                double answer2 = quadCalculator2(numberA, numberB, numberC);
+                //quadOutput.Text += answer1 + " OR " + answer2;
+
+                //this.chart1.Series["quadGraph"].Points.AddXY(answer1, 0);
+                //this.chart1.Series["quadGraph"].Points.AddXY(answer2, 0);
+                //this.chart1.Series["quadGraph"].Points.AddXY(0, numberC);
+
+                // Do error checking here to determine validity of answers
+                // and which is the highest and lowest of the pair
+
+                //int count = 20;
+                //double[,] data = GetPoints(numberA, numberB, numberC, answer1, answer2, count);
+                //for (int i = 0; i < count; i++)
+                //{
+                //    this.chart1.Series["quadGraph"].Points.AddXY(data[i, 0], data[i, 1]);
+                //    label1.Text += data[i, 1].ToString();
+                //}
+                double min = -5;
+                double max = 5;
+                if (minText.Text != "")
+                {
+                    min = double.Parse(minText.Text);
+                }
+                if (maxText.Text != "")
+                {
+                    max = double.Parse(maxText.Text);
+                }
+
+
+                for (double i = min; i <= max; i += (max - min) / 20)
+                {
+                    double pointX = i;
+                    double pointY = GetY(numberA, numberB, numberC, pointX);
+                    this.chart1.Series["quadGraph"].Points.AddXY(pointX, pointY);
+                    label1.Text += pointY.ToString() + " , ";
+                }
             }
-            if (ValueB.Text != "")
+            if (choose == 1)
             {
-                numberB = Convert.ToDouble(ValueB.Text);
+                chart1.Series["quadGraph"].Points.Clear();
+                double numberA = 0;
+                double numberB = 0;
+                if (ValueA.Text != "")
+                {
+                    numberA = Convert.ToDouble(ValueA.Text);
+                }
+                if (ValueB.Text != "")
+                {
+                    numberB = Convert.ToDouble(ValueB.Text);
+                }
+
+                double min = -5;
+                double max = 5;
+                if (minText.Text != "")
+                {
+                    min = double.Parse(minText.Text);
+                }
+                if (maxText.Text != "")
+                {
+                    max = double.Parse(maxText.Text);
+                }
+
+
+                for (double i = min; i <= max; i += (max - min) / 20)
+                {
+                    double pointX = i;
+                    double pointY = (numberA * i) + numberB;
+                    this.chart1.Series["quadGraph"].Points.AddXY(pointX, pointY);
+                    label1.Text += pointY.ToString() + " , ";
+                }
             }
-            if (ValueC.Text != "")
+            if (choose == 3)
             {
-                numberC = Convert.ToDouble(ValueC.Text);
-            }
-
-            double answer1 = quadCalculator1(numberA, numberB, numberC);
-            double answer2 = quadCalculator2(numberA, numberB, numberC);
-            //quadOutput.Text += answer1 + " OR " + answer2;
-
-            //this.chart1.Series["quadGraph"].Points.AddXY(answer1, 0);
-            //this.chart1.Series["quadGraph"].Points.AddXY(answer2, 0);
-            //this.chart1.Series["quadGraph"].Points.AddXY(0, numberC);
-
-            // Do error checking here to determine validity of answers
-            // and which is the highest and lowest of the pair
-
-            //int count = 20;
-            //double[,] data = GetPoints(numberA, numberB, numberC, answer1, answer2, count);
-            //for (int i = 0; i < count; i++)
-            //{
-            //    this.chart1.Series["quadGraph"].Points.AddXY(data[i, 0], data[i, 1]);
-            //    label1.Text += data[i, 1].ToString();
-            //}
-            double min = -5;
-            double max = 5;
-            if (minText.Text != "")
-            {
-                min = double.Parse(minText.Text);
-            }
-            if (maxText.Text != "")
-            {
-                max = double.Parse(maxText.Text);
-            }
+                chart1.Series["quadGraph"].Points.Clear();
+                double numberA = 0;
+                if (ValueA.Text != "")
+                {
+                    numberA = Convert.ToDouble(ValueA.Text);
+                }
+                double min = -5;
+                double max = 5;
+                if (minText.Text != "")
+                {
+                    min = double.Parse(minText.Text);
+                }
+                if (maxText.Text != "")
+                {
+                    max = double.Parse(maxText.Text);
+                }
 
 
-            for (double i = min; i <= max; i +=(max-min)/20)
-            {
-                double pointX = i;
-                double pointY = GetY(numberA, numberB, numberC, pointX);
-                this.chart1.Series["quadGraph"].Points.AddXY(pointX, pointY);
-                label1.Text += pointY.ToString() + " , ";
+                for (double i = min; i <= max; i += (max - min) / 20)
+                {
+                    double pointX = i;
+                    double pointY = Math.Log(numberA, i);
+                    this.chart1.Series["quadGraph"].Points.AddXY(pointX, pointY);
+                    label1.Text += pointY.ToString() + " , ";
+                }
             }
         }
 
@@ -117,5 +182,86 @@ namespace Funkcje
             return answer;
         }
 
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked == true)
+            {
+                ValueA.Enabled = true;
+                ValueB.Enabled = true;
+                ValueC.Enabled = false;
+                calculate.Enabled = true;
+                choose = 1;
+            }
+            if (radioButton2.Checked == true)
+            {
+                ValueA.Enabled = true;
+                ValueB.Enabled = true;
+                ValueC.Enabled = true;
+                calculate.Enabled = true;
+                choose = 2;
+            }
+            if (radioButton3.Checked == true)
+            {
+                ValueA.Enabled = true;
+                ValueB.Enabled = false;
+                ValueC.Enabled = false;
+                calculate.Enabled = true;
+                choose = 3;
+            }
+        }
+        private void radioButton2_CheckedChanged_1(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked == true)
+            {
+                ValueA.Enabled = true;
+                ValueB.Enabled = true;
+                ValueC.Enabled = false;
+                calculate.Enabled = true;
+                choose = 1;
+            }
+            if (radioButton2.Checked == true)
+            {
+                ValueA.Enabled = true;
+                ValueB.Enabled = true;
+                ValueC.Enabled = true;
+                calculate.Enabled = true;
+                choose = 2;
+            }
+            if (radioButton3.Checked == true)
+            {
+                ValueA.Enabled = true;
+                ValueB.Enabled = false;
+                ValueC.Enabled = false;
+                calculate.Enabled = true;
+                choose = 3;
+            }
+        }
+        private void radioButton3_CheckedChanged_1(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked == true)
+            {
+                ValueA.Enabled = true;
+                ValueB.Enabled = true;
+                ValueC.Enabled = false;
+                calculate.Enabled = true;
+                choose = 1;
+            }
+            if (radioButton2.Checked == true)
+            {
+                ValueA.Enabled = true;
+                ValueB.Enabled = true;
+                ValueC.Enabled = true;
+                calculate.Enabled = true;
+                choose = 2;
+            }
+            if (radioButton3.Checked == true)
+            {
+                ValueA.Enabled = true;
+                ValueB.Enabled = false;
+                ValueC.Enabled = false;
+                calculate.Enabled = true;
+                choose = 3;
+            }
+        }
     }
 }
