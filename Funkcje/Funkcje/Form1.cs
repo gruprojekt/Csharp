@@ -184,59 +184,17 @@ namespace Funkcje
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioButton1.Checked == true)
-            {
-                ValueA.Enabled = true;
-                ValueB.Enabled = true;
-                ValueC.Enabled = false;
-                calculate.Enabled = true;
-                choose = 1;
-            }
-            if (radioButton2.Checked == true)
-            {
-                ValueA.Enabled = true;
-                ValueB.Enabled = true;
-                ValueC.Enabled = true;
-                calculate.Enabled = true;
-                choose = 2;
-            }
-            if (radioButton3.Checked == true)
-            {
-                ValueA.Enabled = true;
-                ValueB.Enabled = false;
-                ValueC.Enabled = false;
-                calculate.Enabled = true;
-                choose = 3;
-            }
+            radioChooser();
         }
         private void radioButton2_CheckedChanged_1(object sender, EventArgs e)
         {
-            if (radioButton1.Checked == true)
-            {
-                ValueA.Enabled = true;
-                ValueB.Enabled = true;
-                ValueC.Enabled = false;
-                calculate.Enabled = true;
-                choose = 1;
-            }
-            if (radioButton2.Checked == true)
-            {
-                ValueA.Enabled = true;
-                ValueB.Enabled = true;
-                ValueC.Enabled = true;
-                calculate.Enabled = true;
-                choose = 2;
-            }
-            if (radioButton3.Checked == true)
-            {
-                ValueA.Enabled = true;
-                ValueB.Enabled = false;
-                ValueC.Enabled = false;
-                calculate.Enabled = true;
-                choose = 3;
-            }
+            radioChooser();
         }
         private void radioButton3_CheckedChanged_1(object sender, EventArgs e)
+        {
+            radioChooser();
+        }
+        private void radioChooser()
         {
             if (radioButton1.Checked == true)
             {
