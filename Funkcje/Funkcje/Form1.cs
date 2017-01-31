@@ -20,19 +20,20 @@ namespace Funkcje
         private void Form1_Load(object sender, EventArgs e)
         {
         }
-        private double quadCalculator1(double a, double b, double c)
-        {
-            double sqrtpart = b * b - 4 * a * c;
-            double x1 = (-b + System.Math.Sqrt(sqrtpart)) / (2 * a);
-            return x1;
-        }
-        private double quadCalculator2(double a, double b, double c)
-        {
-            double sqrtpart = b * b - 4 * a * c;
-            double x2 = (-b - System.Math.Sqrt(sqrtpart)) / (2 * a);
-            return x2;
+        // to ponizej nie potrzebne jezeli nie rozwiazujesz rownania
+        //private double quadCalculator1(double a, double b, double c)
+        //{
+        //    double sqrtpart = b * b - 4 * a * c;
+        //    double x1 = (-b + System.Math.Sqrt(sqrtpart)) / (2 * a);
+        //    return x1;
+        //}
+        //private double quadCalculator2(double a, double b, double c)
+        //{
+        //    double sqrtpart = b * b - 4 * a * c;
+        //    double x2 = (-b - System.Math.Sqrt(sqrtpart)) / (2 * a);
+        //    return x2;
 
-        }
+        //}
         private void calculate_Click(object sender, EventArgs e)
         {
             if (choose == 2)
@@ -55,8 +56,8 @@ namespace Funkcje
                     numberC = Convert.ToDouble(ValueC.Text);
                 }
 
-                double answer1 = quadCalculator1(numberA, numberB, numberC);
-                double answer2 = quadCalculator2(numberA, numberB, numberC);
+               // double answer1 = quadCalculator1(numberA, numberB, numberC);
+                //double answer2 = quadCalculator2(numberA, numberB, numberC);
                 //quadOutput.Text += answer1 + " OR " + answer2;
 
                 //this.chart1.Series["quadGraph"].Points.AddXY(answer1, 0);
@@ -156,26 +157,26 @@ namespace Funkcje
                 }
             }
         }
+        // to ponizej tez narazie nie potrzebne, tak jak wyzej (odpale to jezeli bedziemy musieli rozwiazywac rownania)
+        //private double[,] GetPoints(double a, double b, double c, double xInterceptLow, double xInterceptHigh, int pointCount)
+        //{
+        //    double[,] output = new double[pointCount, 2];
 
-        private double[,] GetPoints(double a, double b, double c, double xInterceptLow, double xInterceptHigh, int pointCount)
-        {
-            double[,] output = new double[pointCount, 2];
+        //    double subRange = xInterceptLow - xInterceptHigh;
+        //    double delta = (2 * subRange) / pointCount;
 
-            double subRange = xInterceptLow - xInterceptHigh;
-            double delta = (2 * subRange) / pointCount;
+        //    double xMin = xInterceptLow - (subRange / 2);
+        //    double xMax = xInterceptHigh + (subRange / 2);
 
-            double xMin = xInterceptLow - (subRange / 2);
-            double xMax = xInterceptHigh + (subRange / 2);
-
-            for (int i = 0; i < pointCount; i++)
-            {
-                double x = xMin + (i * delta);
-                double ans = GetY(a, b, c, x);
-                output[i, 0] = x;
-                output[i, 1] = ans;
-            }
-            return output;
-        }
+        //    for (int i = 0; i < pointCount; i++)
+        //    {
+        //        double x = xMin + (i * delta);
+        //        double ans = GetY(a, b, c, x);
+        //        output[i, 0] = x;
+        //        output[i, 1] = ans;
+        //    }
+        //    return output;
+        //}
 
         private double GetY(double a, double b, double c, double x)
         {
