@@ -47,43 +47,51 @@ namespace WindowsFormsApplication1
                 XmlSerializer serializer = new XmlSerializer(typeof(TestObj));
                 Test = (TestObj)serializer.Deserialize(r);
                 r.Close();
+                int x = 0;
+                int y = 0;
+                label2.Text = numer.ToString();
+                label1.Text = Test.ListaPytan[numer - 1];
+                for (int i = 0; i < Test.ListaOdpowiedzi[numer - 1].Count(); i++)
+                {
+                    Point polozenie_textboxa = new Point(x, y);
+                    listalabel.Add(new Label());
+                    listalabel[i].Location = polozenie_textboxa;
+                    listalabel[i].Size = new System.Drawing.Size(250, 20);
+                    panel1.Controls.Add(listalabel[i]);
+                    listalabel[i].Text = Test.ListaOdpowiedzi[numer - 1][i];
+                    if (Test.JednaOdpowiedz[numer - 1] == true)
+                    {
+                        Point polozenie_radio = new Point(x + 270, y);
+                        listaradio.Add(new RadioButton());
+                        listaradio[i].Location = polozenie_radio;
+                        panel1.Controls.Add(listaradio[i]);
+                        //   listaradio[i].Checked = Test.ListaPoprawnych[numer - 1][i];
+                    }
+                    else
+                    {
+                        Point polozenie_check = new Point(x + 270, y);
+                        listacheck.Add(new CheckBox());
+                        listacheck[i].Location = polozenie_check;
+                        panel1.Controls.Add(listacheck[i]);
+                        //       listacheck[i].Checked = Test.ListaPoprawnych[numer - 1][i];
+                    }
+                    y = y + 30;
+                    if (Test.Obraz[numer - 1] != false)
+                    {
+                        pictureBox1.ImageLocation = (Test.PathList[numer - 1]);
+                    }
+                    button1.Enabled = false;
+                    button2.Enabled = true;
+                }
             }
-            int x = 0;
-            int y = 0;
-            label2.Text = numer.ToString();
-            label1.Text = Test.ListaPytan[numer - 1];
-            for (int i = 0; i < Test.ListaOdpowiedzi[numer - 1].Count(); i++)
+            else
             {
-                Point polozenie_textboxa = new Point(x, y);
-                listalabel.Add(new Label());
-                listalabel[i].Location = polozenie_textboxa;
-                listalabel[i].Size = new System.Drawing.Size(250, 20);
-                panel1.Controls.Add(listalabel[i]);
-                listalabel[i].Text = Test.ListaOdpowiedzi[numer - 1][i];
-                if (Test.JednaOdpowiedz[numer - 1] == true)
-                {
-                    Point polozenie_radio = new Point(x + 270, y);
-                    listaradio.Add(new RadioButton());
-                    listaradio[i].Location = polozenie_radio;
-                    panel1.Controls.Add(listaradio[i]);
-                 //   listaradio[i].Checked = Test.ListaPoprawnych[numer - 1][i];
-                }
-                else
-                {
-                    Point polozenie_check = new Point(x + 270, y);
-                    listacheck.Add(new CheckBox());
-                    listacheck[i].Location = polozenie_check;
-                    panel1.Controls.Add(listacheck[i]);
-                    //       listacheck[i].Checked = Test.ListaPoprawnych[numer - 1][i];
-                }
-                y = y + 30;
-                if (Test.Obraz[numer - 1] != false)
-                {
-                    pictureBox1.ImageLocation = (Test.PathList[numer - 1]);
-                }
-                button1.Enabled = false;
-                button2.Enabled = true;
+                Form1 form1 = new Form1();
+                form1.Visible = true;
+                this.Visible = false;
             }
+
+
         }
         private void Form4_FormClosing(object sender, FormClosingEventArgs e)
         {

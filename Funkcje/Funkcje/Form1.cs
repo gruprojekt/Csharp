@@ -38,6 +38,7 @@ namespace Funkcje
             if (choose == 2)
             {
                 chart1.Series["quadGraph"].Points.Clear();
+                chart1.Series["quadGraph"].Color = Color.Red;
                 double numberA = 0;
                 double numberB = 0;
                 double numberC = 0;

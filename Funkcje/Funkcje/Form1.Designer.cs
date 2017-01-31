@@ -67,12 +67,13 @@
             this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(12, 12);
             this.chart1.Name = "chart1";
+            this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Excel;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series1.CustomProperties = "IsXAxisQuantitative=True";
             series1.IsXValueIndexed = true;
             series1.Legend = "Legend1";
-            series1.MarkerSize = 1;
+            series1.MarkerColor = System.Drawing.Color.Red;
             series1.Name = "quadGraph";
             this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(545, 537);
@@ -119,7 +120,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(591, 154);
+            this.label1.Location = new System.Drawing.Point(563, 331);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 5;

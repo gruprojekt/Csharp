@@ -15,6 +15,7 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
+            FormClosing += Form3_FormClosing;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -41,6 +42,13 @@ namespace WindowsFormsApplication1
             this.Visible = false;
             Form4 FormaCzwarta = new Form4();
             FormaCzwarta.Show();
+        }
+        private void Form3_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                Application.Exit();
+            }
         }
     }
 }
