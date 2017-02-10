@@ -172,6 +172,14 @@ namespace WindowsFormsApplication1
 
         private void button4_Click(object sender, EventArgs e)
         {
+            if (checkBox1.Checked == true)
+            {
+                Test.isQuestionMixed = true;
+            }
+            else
+            {
+                Test.isQuestionMixed = false;
+            }
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = "(*.xml)|*.xml";
             dialog.ShowDialog();

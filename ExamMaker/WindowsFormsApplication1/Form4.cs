@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 
@@ -16,6 +12,8 @@ namespace WindowsFormsApplication1
     {
         TestObj Test = new TestObj();
         int numer = 1;
+        List<int> listaUzytych = new List<int>();
+        List<int> listaPotrzebna = new List<int>();
         List<Label> listalabel = new List<Label>();
         List<RadioButton> listaradio = new List<RadioButton>();
         List<CheckBox> listacheck = new List<CheckBox>();
@@ -40,7 +38,6 @@ namespace WindowsFormsApplication1
             openFileDialog1.Filter = "(*.xml) | *.xml";
             openFileDialog1.Title = "Wybierz test";
 
-
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 StreamReader r = new StreamReader(openFileDialog1.FileName);
@@ -49,39 +46,80 @@ namespace WindowsFormsApplication1
                 r.Close();
                 int x = 0;
                 int y = 0;
-                label2.Text = numer.ToString();
-                label1.Text = Test.ListaPytan[numer - 1];
-                for (int i = 0; i < Test.ListaOdpowiedzi[numer - 1].Count(); i++)
+                if (Test.isQuestionMixed == false)
                 {
-                    Point polozenie_textboxa = new Point(x, y);
-                    listalabel.Add(new Label());
-                    listalabel[i].Location = polozenie_textboxa;
-                    listalabel[i].Size = new System.Drawing.Size(250, 20);
-                    panel1.Controls.Add(listalabel[i]);
-                    listalabel[i].Text = Test.ListaOdpowiedzi[numer - 1][i];
-                    if (Test.JednaOdpowiedz[numer - 1] == true)
+                    label2.Text = numer.ToString();
+                    label1.Text = Test.ListaPytan[numer - 1];
+                    for (int i = 0; i < Test.ListaOdpowiedzi[numer - 1].Count(); i++)
                     {
-                        Point polozenie_radio = new Point(x + 270, y);
-                        listaradio.Add(new RadioButton());
-                        listaradio[i].Location = polozenie_radio;
-                        panel1.Controls.Add(listaradio[i]);
-                        //   listaradio[i].Checked = Test.ListaPoprawnych[numer - 1][i];
+                        Point polozenie_textboxa = new Point(x, y);
+                        listalabel.Add(new Label());
+                        listalabel[i].Location = polozenie_textboxa;
+                        listalabel[i].Size = new System.Drawing.Size(250, 20);
+                        panel1.Controls.Add(listalabel[i]);
+                        listalabel[i].Text = Test.ListaOdpowiedzi[numer - 1][i];
+                        if (Test.JednaOdpowiedz[numer - 1] == true)
+                        {
+                            Point polozenie_radio = new Point(x + 270, y);
+                            listaradio.Add(new RadioButton());
+                            listaradio[i].Location = polozenie_radio;
+                            panel1.Controls.Add(listaradio[i]);
+                            //   listaradio[i].Checked = Test.ListaPoprawnych[numer - 1][i];
+                        }
+                        else
+                        {
+                            Point polozenie_check = new Point(x + 270, y);
+                            listacheck.Add(new CheckBox());
+                            listacheck[i].Location = polozenie_check;
+                            panel1.Controls.Add(listacheck[i]);
+                            //       listacheck[i].Checked = Test.ListaPoprawnych[numer - 1][i];
+                        }
+                        y = y + 30;
+                        if (Test.Obraz[numer - 1] != false)
+                        {
+                            pictureBox1.ImageLocation = (Test.PathList[numer - 1]);
+                        }
+                        button1.Enabled = false;
+                        button2.Enabled = true;
                     }
-                    else
+                }
+                else
+                {
+                    FillList(Test.ListaPytan.Count());
+                    label2.Text = numer.ToString();
+                    label1.Text = Test.ListaPytan[listaPotrzebna[numer - 1]];
+                    for (int i = 0; i < Test.ListaOdpowiedzi[listaPotrzebna[numer - 1]].Count(); i++)
                     {
-                        Point polozenie_check = new Point(x + 270, y);
-                        listacheck.Add(new CheckBox());
-                        listacheck[i].Location = polozenie_check;
-                        panel1.Controls.Add(listacheck[i]);
-                        //       listacheck[i].Checked = Test.ListaPoprawnych[numer - 1][i];
+                        Point polozenie_textboxa = new Point(x, y);
+                        listalabel.Add(new Label());
+                        listalabel[i].Location = polozenie_textboxa;
+                        listalabel[i].Size = new System.Drawing.Size(250, 20);
+                        panel1.Controls.Add(listalabel[i]);
+                        listalabel[i].Text = Test.ListaOdpowiedzi[listaPotrzebna[numer - 1]][i];
+                        if (Test.JednaOdpowiedz[listaPotrzebna[numer - 1]] == true)
+                        {
+                            Point polozenie_radio = new Point(x + 270, y);
+                            listaradio.Add(new RadioButton());
+                            listaradio[i].Location = polozenie_radio;
+                            panel1.Controls.Add(listaradio[i]);
+                            //   listaradio[i].Checked = Test.ListaPoprawnych[numer - 1][i];
+                        }
+                        else
+                        {
+                            Point polozenie_check = new Point(x + 270, y);
+                            listacheck.Add(new CheckBox());
+                            listacheck[i].Location = polozenie_check;
+                            panel1.Controls.Add(listacheck[i]);
+                            //       listacheck[i].Checked = Test.ListaPoprawnych[numer - 1][i];
+                        }
+                        y = y + 30;
+                        if (Test.Obraz[listaPotrzebna[numer - 1]] != false)
+                        {
+                            pictureBox1.ImageLocation = (Test.PathList[listaPotrzebna[numer - 1]]);
+                        }
+                        button1.Enabled = false;
+                        button2.Enabled = true;
                     }
-                    y = y + 30;
-                    if (Test.Obraz[numer - 1] != false)
-                    {
-                        pictureBox1.ImageLocation = (Test.PathList[numer - 1]);
-                    }
-                    button1.Enabled = false;
-                    button2.Enabled = true;
                 }
             }
             else
@@ -103,18 +141,38 @@ namespace WindowsFormsApplication1
         private void button2_Click(object sender, EventArgs e)
         {
             listauzytkownika.Add(new List<bool>());
-            if (Test.JednaOdpowiedz[numer - 1] == true)
+            if (Test.isQuestionMixed == false)
             {
-                for (int i = 0; i < Test.ListaPoprawnych[numer - 1].Count; i++)
+                if (Test.JednaOdpowiedz[numer - 1] == true)
                 {
-                    listauzytkownika[numer - 1].Add(listaradio[i].Checked);
+                    for (int i = 0; i < Test.ListaPoprawnych[numer - 1].Count; i++)
+                    {
+                        listauzytkownika[numer - 1].Add(listaradio[i].Checked);
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < Test.ListaPoprawnych[numer - 1].Count; i++)
+                    {
+                        listauzytkownika[numer - 1].Add(listacheck[i].Checked);
+                    }
                 }
             }
             else
             {
-                for (int i = 0; i < Test.ListaPoprawnych[numer - 1].Count; i++)
+                if (Test.JednaOdpowiedz[listaPotrzebna[numer - 1]] == true)
                 {
-                    listauzytkownika[numer - 1].Add(listacheck[i].Checked);
+                    for (int i = 0; i < Test.ListaPoprawnych[listaPotrzebna[numer- 1]].Count; i++)
+                    {
+                        listauzytkownika[numer - 1].Add(listaradio[i].Checked);
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < Test.ListaPoprawnych[listaPotrzebna[numer - 1]].Count; i++)
+                    {
+                        listauzytkownika[numer - 1].Add(listacheck[i].Checked);
+                    }
                 }
             }
             if ((numer + 1) <= Test.ListaPytan.Count())
@@ -128,61 +186,145 @@ namespace WindowsFormsApplication1
                 numer++;
                 int x = 0;
                 int y = 0;
-                label2.Text = numer.ToString();
-                label1.Text = Test.ListaPytan[numer - 1];
-                if (Test.Obraz[numer - 1] != false)
+                if (Test.isQuestionMixed == false)
                 {
-                    pictureBox1.ImageLocation = (Test.PathList[numer - 1]);
+                    label2.Text = numer.ToString();
+                    label1.Text = Test.ListaPytan[numer - 1];
+                    if (Test.Obraz[numer - 1] != false)
+                    {
+                        pictureBox1.ImageLocation = (Test.PathList[numer - 1]);
+                    }
+                    for (int i = 0; i < Test.ListaOdpowiedzi[numer - 1].Count(); i++)
+                    {
+                        Point polozenie_textboxa = new Point(x, y);
+                        listalabel.Add(new Label());
+                        listalabel[i].Location = polozenie_textboxa;
+                        listalabel[i].Size = new System.Drawing.Size(250, 20);
+                        panel1.Controls.Add(listalabel[i]);
+                        listalabel[i].Text = Test.ListaOdpowiedzi[numer - 1][i];
+                        if (Test.JednaOdpowiedz[numer - 1] == true)
+                        {
+                            Point polozenie_radio = new Point(x + 270, y);
+                            listaradio.Add(new RadioButton());
+                            listaradio[i].Location = polozenie_radio;
+                            panel1.Controls.Add(listaradio[i]);
+                            //   listaradio[i].Checked = Test.ListaPoprawnych[numer - 1][i];
+                        }
+                        else
+                        {
+                            Point polozenie_check = new Point(x + 270, y);
+                            listacheck.Add(new CheckBox());
+                            listacheck[i].Location = polozenie_check;
+                            panel1.Controls.Add(listacheck[i]);
+                            //   listacheck[i].Checked = Test.ListaPoprawnych[numer - 1][i];
+                        }
+                        y = y + 30;
+                        button1.Enabled = false;
+                        button2.Enabled = true;
+                    }
                 }
-                for (int i = 0; i < Test.ListaOdpowiedzi[numer - 1].Count(); i++)
+                else
                 {
-                    Point polozenie_textboxa = new Point(x, y);
-                    listalabel.Add(new Label());
-                    listalabel[i].Location = polozenie_textboxa;
-                    listalabel[i].Size = new System.Drawing.Size(250, 20);
-                    panel1.Controls.Add(listalabel[i]);
-                    listalabel[i].Text = Test.ListaOdpowiedzi[numer - 1][i];
-                    if (Test.JednaOdpowiedz[numer - 1] == true)
+                    label2.Text = numer.ToString();
+                    label1.Text = Test.ListaPytan[listaPotrzebna[numer - 1]];
+                    if (Test.Obraz[listaPotrzebna[numer - 1]] != false)
                     {
-                        Point polozenie_radio = new Point(x + 270, y);
-                        listaradio.Add(new RadioButton());
-                        listaradio[i].Location = polozenie_radio;
-                        panel1.Controls.Add(listaradio[i]);
-                     //   listaradio[i].Checked = Test.ListaPoprawnych[numer - 1][i];
+                        pictureBox1.ImageLocation = (Test.PathList[listaPotrzebna[numer - 1]]);
                     }
-                    else
+                    for (int i = 0; i < Test.ListaOdpowiedzi[listaPotrzebna[numer - 1]].Count(); i++)
                     {
-                        Point polozenie_check = new Point(x + 270, y);
-                        listacheck.Add(new CheckBox());
-                        listacheck[i].Location = polozenie_check;
-                        panel1.Controls.Add(listacheck[i]);
-                     //   listacheck[i].Checked = Test.ListaPoprawnych[numer - 1][i];
+                        Point polozenie_textboxa = new Point(x, y);
+                        listalabel.Add(new Label());
+                        listalabel[i].Location = polozenie_textboxa;
+                        listalabel[i].Size = new System.Drawing.Size(250, 20);
+                        panel1.Controls.Add(listalabel[i]);
+                        listalabel[i].Text = Test.ListaOdpowiedzi[listaPotrzebna[numer - 1]][i];
+                        if (Test.JednaOdpowiedz[listaPotrzebna[numer - 1]] == true)
+                        {
+                            Point polozenie_radio = new Point(x + 270, y);
+                            listaradio.Add(new RadioButton());
+                            listaradio[i].Location = polozenie_radio;
+                            panel1.Controls.Add(listaradio[i]);
+                            //   listaradio[i].Checked = Test.ListaPoprawnych[numer - 1][i];
+                        }
+                        else
+                        {
+                            Point polozenie_check = new Point(x + 270, y);
+                            listacheck.Add(new CheckBox());
+                            listacheck[i].Location = polozenie_check;
+                            panel1.Controls.Add(listacheck[i]);
+                            //   listacheck[i].Checked = Test.ListaPoprawnych[numer - 1][i];
+                        }
+                        y = y + 30;
+                        button1.Enabled = false;
+                        button2.Enabled = true;
                     }
-                    y = y + 30;
-                    button1.Enabled = false;
-                    button2.Enabled = true;
                 }
             }
             else
             {
                 button2.Enabled = false;
-                for(int i = 0; i < Test.ListaPytan.Count;i++)
+                if (!Test.isQuestionMixed)
                 {
-                    for (int j = 0; j < Test.ListaPoprawnych[i].Count; j++)
+                    for (int i = 0; i < Test.ListaPytan.Count; i++)
                     {
-                        if (listauzytkownika[i][j] == Test.ListaPoprawnych[i][j] && Test.ListaPoprawnych[i][j] == true)
+                        for (int j = 0; j < Test.ListaPoprawnych[i].Count; j++)
                         {
-                            poprawne++;
-                        }
-                        if (Test.ListaPoprawnych[i][j] == true)
-                        {
-                            wszystkiepoprawne++;
-                        }
+                            if (listauzytkownika[i][j] == Test.ListaPoprawnych[i][j] && Test.ListaPoprawnych[i][j] == true)
+                            {
+                                poprawne++;
+                            }
+                            if (Test.ListaPoprawnych[i][j] == true)
+                            {
+                                wszystkiepoprawne++;
+                            }
 
+                        }
+                    }
+                    label3.Text = poprawne.ToString() + " : poprawnych odpowiedzi z " + wszystkiepoprawne.ToString() + " mozliwych";
+                }
+                else
+                {
+                    for (int i = 0; i < Test.ListaPytan.Count; i++)
+                    { 
+                        for (int j = 0; j < Test.ListaPoprawnych[listaPotrzebna[i]].Count; j++)
+                        {
+                            if (listauzytkownika[i][j] == Test.ListaPoprawnych[listaPotrzebna[i]][j] && Test.ListaPoprawnych[listaPotrzebna[i]][j] == true)
+                            {
+                                poprawne++;
+                            }
+                            if (Test.ListaPoprawnych[listaPotrzebna[i]][j] == true)
+                            {
+                                wszystkiepoprawne++;
+                            }
+
+                        }
+                    }
+                    label3.Text = poprawne.ToString() + " : poprawnych odpowiedzi z " + wszystkiepoprawne.ToString() + " mozliwych";
+                }
+            }
+        }
+        public int Shuffle(int a)
+        { 
+                Random rnd = new Random();
+                int liczba = 0;
+                bool OK = true;
+                while (OK)
+                {
+                    liczba = rnd.Next(0,(a));
+                    if (!listaUzytych.Contains(liczba) )
+                    {
+                        listaUzytych.Add(liczba);
+                        OK = false;
                     }
                 }
-                label3.Text = poprawne.ToString() + " : poprawnych odpowiedzi z " + wszystkiepoprawne.ToString() + " mozliwych";
-
+            return liczba;
+        }
+        public void FillList(int a)
+        {
+            for (int i = 0; i < a; i++)
+            {
+                this.listaPotrzebna.Add(Shuffle(a));
             }
         }
     } 

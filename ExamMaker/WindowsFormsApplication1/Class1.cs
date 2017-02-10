@@ -14,12 +14,12 @@ namespace WindowsFormsApplication1
         public List<bool> JednaOdpowiedz = new List<bool>();
         public List<bool> Obraz = new List<bool>();
         public List<string> PathList = new List<string>();
-
+        public bool isQuestionMixed = false;
         public TestObj()
         {
 
         }
-        public TestObj(List<string> listapytan, List<List<string>> listaodpowiedzi, List<List<bool>> listapoprawnych, List<bool> jednaodpowiedz, List<bool> obraz, List<string> path)
+        public TestObj(List<string> listapytan, List<List<string>> listaodpowiedzi, List<List<bool>> listapoprawnych, List<bool> jednaodpowiedz, List<bool> obraz, List<string> path,bool mixed)
         {
             ListaPytan = listapytan;
             ListaOdpowiedzi = listaodpowiedzi;
@@ -27,6 +27,7 @@ namespace WindowsFormsApplication1
             JednaOdpowiedz = jednaodpowiedz;
             Obraz = obraz;
             PathList = path;
+            isQuestionMixed = mixed;
         }
     }
 }
