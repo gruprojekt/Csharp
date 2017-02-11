@@ -155,7 +155,14 @@ namespace Funkcje
 
                     double min = -5;
                     double max = 5;
-
+                    if (minText.Text != "")
+                    {
+                        min = double.Parse(minText.Text);
+                    }
+                    if (maxText.Text != "")
+                    {
+                        max = double.Parse(maxText.Text);
+                    }
 
                     for (double i = min; i <= max; i += (max - min) / 20)
                     {
