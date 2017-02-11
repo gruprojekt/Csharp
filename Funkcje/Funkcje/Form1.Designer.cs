@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.ValueA = new System.Windows.Forms.TextBox();
             this.ValueB = new System.Windows.Forms.TextBox();
@@ -48,39 +48,41 @@
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.ValueD = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // chart1
             // 
-            chartArea1.AlignmentOrientation = ((System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations)((System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.Vertical | System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.Horizontal)));
-            chartArea1.AxisX.Crossing = -1.7976931348623157E+308D;
-            chartArea1.AxisX2.Crossing = -1.7976931348623157E+308D;
-            chartArea1.AxisY.Crossing = -1.7976931348623157E+308D;
-            chartArea1.AxisY2.Crossing = -1.7976931348623157E+308D;
-            chartArea1.IsSameFontSizeForAllAxes = true;
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
+            chartArea4.AlignmentOrientation = ((System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations)((System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.Vertical | System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.Horizontal)));
+            chartArea4.AxisX.Crossing = -1.7976931348623157E+308D;
+            chartArea4.AxisX2.Crossing = -1.7976931348623157E+308D;
+            chartArea4.AxisY.Crossing = -1.7976931348623157E+308D;
+            chartArea4.AxisY2.Crossing = -1.7976931348623157E+308D;
+            chartArea4.IsSameFontSizeForAllAxes = true;
+            chartArea4.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea4);
             this.chart1.ImeMode = System.Windows.Forms.ImeMode.On;
-            legend1.Alignment = System.Drawing.StringAlignment.Center;
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
+            legend4.Alignment = System.Drawing.StringAlignment.Center;
+            legend4.Name = "Legend1";
+            this.chart1.Legends.Add(legend4);
             this.chart1.Location = new System.Drawing.Point(12, 12);
             this.chart1.Name = "chart1";
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Excel;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series1.CustomProperties = "IsXAxisQuantitative=True";
-            series1.IsXValueIndexed = true;
-            series1.Legend = "Legend1";
-            series1.MarkerColor = System.Drawing.Color.Red;
-            series1.Name = "quadGraph";
-            this.chart1.Series.Add(series1);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series4.CustomProperties = "IsXAxisQuantitative=True";
+            series4.IsXValueIndexed = true;
+            series4.Legend = "Legend1";
+            series4.MarkerColor = System.Drawing.Color.Red;
+            series4.Name = "quadGraph";
+            this.chart1.Series.Add(series4);
             this.chart1.Size = new System.Drawing.Size(545, 537);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
-            title1.Name = "quadGraph";
-            this.chart1.Titles.Add(title1);
+            title4.Name = "quadGraph";
+            this.chart1.Titles.Add(title4);
             // 
             // ValueA
             // 
@@ -213,18 +215,37 @@
             this.radioButton3.AutoSize = true;
             this.radioButton3.Location = new System.Drawing.Point(636, 162);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(86, 17);
+            this.radioButton3.Size = new System.Drawing.Size(147, 17);
             this.radioButton3.TabIndex = 16;
             this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "f(x) = loga * x";
+            this.radioButton3.Text = "f(x) =ax^3 + bx^2 + cx + d";
             this.radioButton3.UseVisualStyleBackColor = true;
             this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged_1);
+            // 
+            // ValueD
+            // 
+            this.ValueD.Enabled = false;
+            this.ValueD.Location = new System.Drawing.Point(636, 90);
+            this.ValueD.Name = "ValueD";
+            this.ValueD.Size = new System.Drawing.Size(100, 20);
+            this.ValueD.TabIndex = 17;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(608, 93);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(22, 13);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "d =";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.ValueD);
             this.Controls.Add(this.radioButton3);
             this.Controls.Add(this.radioButton2);
             this.Controls.Add(this.radioButton1);
@@ -268,6 +289,8 @@
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.TextBox ValueD;
+        private System.Windows.Forms.Label label7;
     }
 }
 

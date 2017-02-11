@@ -43,55 +43,62 @@ namespace Funkcje
                 double numberA = 0;
                 double numberB = 0;
                 double numberC = 0;
-                if (ValueA.Text != "")
+                try
                 {
-                    numberA = Convert.ToDouble(ValueA.Text);
+                    if (ValueA.Text != "")
+                    {
+                        numberA = Convert.ToDouble(ValueA.Text);
+                    }
+                    if (ValueB.Text != "")
+                    {
+                        numberB = Convert.ToDouble(ValueB.Text);
+                    }
+                    if (ValueC.Text != "")
+                    {
+                        numberC = Convert.ToDouble(ValueC.Text);
+                    }
+
+                    // double answer1 = quadCalculator1(numberA, numberB, numberC);
+                    //double answer2 = quadCalculator2(numberA, numberB, numberC);
+                    //quadOutput.Text += answer1 + " OR " + answer2;
+
+                    //this.chart1.Series["quadGraph"].Points.AddXY(answer1, 0);
+                    //this.chart1.Series["quadGraph"].Points.AddXY(answer2, 0);
+                    //this.chart1.Series["quadGraph"].Points.AddXY(0, numberC);
+
+                    // Do error checking here to determine validity of answers
+                    // and which is the highest and lowest of the pair
+
+                    //int count = 20;
+                    //double[,] data = GetPoints(numberA, numberB, numberC, answer1, answer2, count);
+                    //for (int i = 0; i < count; i++)
+                    //{
+                    //    this.chart1.Series["quadGraph"].Points.AddXY(data[i, 0], data[i, 1]);
+                    //    label1.Text += data[i, 1].ToString();
+                    //}
+                    double min = -5;
+                    double max = 5;
+                    if (minText.Text != "")
+                    {
+                        min = double.Parse(minText.Text);
+                    }
+                    if (maxText.Text != "")
+                    {
+                        max = double.Parse(maxText.Text);
+                    }
+
+
+                    for (double i = min; i <= max; i += (max - min) / 20)
+                    {
+                        double pointX = i;
+                        double pointY = GetY(numberA, numberB, numberC, pointX);
+                        this.chart1.Series["quadGraph"].Points.AddXY(pointX, pointY);
+                        label1.Text += pointY.ToString() + " , ";
+                    }
                 }
-                if (ValueB.Text != "")
+                catch
                 {
-                    numberB = Convert.ToDouble(ValueB.Text);
-                }
-                if (ValueC.Text != "")
-                {
-                    numberC = Convert.ToDouble(ValueC.Text);
-                }
-
-               // double answer1 = quadCalculator1(numberA, numberB, numberC);
-                //double answer2 = quadCalculator2(numberA, numberB, numberC);
-                //quadOutput.Text += answer1 + " OR " + answer2;
-
-                //this.chart1.Series["quadGraph"].Points.AddXY(answer1, 0);
-                //this.chart1.Series["quadGraph"].Points.AddXY(answer2, 0);
-                //this.chart1.Series["quadGraph"].Points.AddXY(0, numberC);
-
-                // Do error checking here to determine validity of answers
-                // and which is the highest and lowest of the pair
-
-                //int count = 20;
-                //double[,] data = GetPoints(numberA, numberB, numberC, answer1, answer2, count);
-                //for (int i = 0; i < count; i++)
-                //{
-                //    this.chart1.Series["quadGraph"].Points.AddXY(data[i, 0], data[i, 1]);
-                //    label1.Text += data[i, 1].ToString();
-                //}
-                double min = -5;
-                double max = 5;
-                if (minText.Text != "")
-                {
-                    min = double.Parse(minText.Text);
-                }
-                if (maxText.Text != "")
-                {
-                    max = double.Parse(maxText.Text);
-                }
-
-
-                for (double i = min; i <= max; i += (max - min) / 20)
-                {
-                    double pointX = i;
-                    double pointY = GetY(numberA, numberB, numberC, pointX);
-                    this.chart1.Series["quadGraph"].Points.AddXY(pointX, pointY);
-                    label1.Text += pointY.ToString() + " , ";
+                    MessageBox.Show("Problem z danymi, sprawdz jeszcze raz");
                 }
             }
             if (choose == 1)
@@ -99,62 +106,71 @@ namespace Funkcje
                 chart1.Series["quadGraph"].Points.Clear();
                 double numberA = 0;
                 double numberB = 0;
-                if (ValueA.Text != "")
+                try
                 {
-                    numberA = Convert.ToDouble(ValueA.Text);
-                }
-                if (ValueB.Text != "")
-                {
-                    numberB = Convert.ToDouble(ValueB.Text);
-                }
+                    if (ValueA.Text != "")
+                    {
+                        numberA = Convert.ToDouble(ValueA.Text);
+                    }
+                    if (ValueB.Text != "")
+                    {
+                        numberB = Convert.ToDouble(ValueB.Text);
+                    }
 
-                double min = -5;
-                double max = 5;
-                if (minText.Text != "")
-                {
-                    min = double.Parse(minText.Text);
-                }
-                if (maxText.Text != "")
-                {
-                    max = double.Parse(maxText.Text);
-                }
+                    double min = -5;
+                    double max = 5;
+                    if (minText.Text != "")
+                    {
+                        min = double.Parse(minText.Text);
+                    }
+                    if (maxText.Text != "")
+                    {
+                        max = double.Parse(maxText.Text);
+                    }
 
 
-                for (double i = min; i <= max; i += (max - min) / 20)
-                {
-                    double pointX = i;
-                    double pointY = (numberA * i) + numberB;
-                    this.chart1.Series["quadGraph"].Points.AddXY(pointX, pointY);
-                    label1.Text += pointY.ToString() + " , ";
+                    for (double i = min; i <= max; i += (max - min) / 20)
+                    {
+                        double pointX = i;
+                        double pointY = (numberA * i) + numberB;
+                        this.chart1.Series["quadGraph"].Points.AddXY(pointX, pointY);
+                        label1.Text += pointY.ToString() + " , ";
+                    }
                 }
+                catch { MessageBox.Show("Problem z danymi, sprawdz jeszcze raz"); }
             }
             if (choose == 3)
             {
                 chart1.Series["quadGraph"].Points.Clear();
                 double numberA = 0;
-                if (ValueA.Text != "")
+                double numberB = 0;
+                double numberC = 0;
+                double numberD = 0;
+                try
                 {
                     numberA = Convert.ToDouble(ValueA.Text);
-                }
-                double min = -5;
-                double max = 5;
-                if (minText.Text != "")
-                {
-                    min = double.Parse(minText.Text);
-                }
-                if (maxText.Text != "")
-                {
-                    max = double.Parse(maxText.Text);
-                }
+                    numberB = Convert.ToDouble(ValueB.Text);
+                    numberC = Convert.ToDouble(ValueC.Text);
+                    numberD = Convert.ToDouble(ValueD.Text);
+
+                    double min = -5;
+                    double max = 5;
 
 
-                for (double i = min; i <= max; i += (max - min) / 20)
-                {
-                    double pointX = i;
-                    double pointY = Math.Log(numberA, i);
-                    this.chart1.Series["quadGraph"].Points.AddXY(pointX, pointY);
-                    label1.Text += pointY.ToString() + " , ";
+                    for (double i = min; i <= max; i += (max - min) / 20)
+                    {
+                        double pointX = i;
+                        double pointY = numberA * i * i * i + numberB * i * i + numberC * i + numberD;
+                        this.chart1.Series["quadGraph"].Points.AddXY(pointX, pointY);
+                        label1.Text += pointY.ToString() + " , ";
+                    }
                 }
+                catch
+                {
+                    MessageBox.Show("Problem z danymi, sprawdz jeszcze raz");
+
+                }
+            
             }
         }
         // to ponizej tez narazie nie potrzebne, tak jak wyzej (odpale to jezeli bedziemy musieli rozwiazywac rownania)
@@ -203,6 +219,7 @@ namespace Funkcje
                 ValueA.Enabled = true;
                 ValueB.Enabled = true;
                 ValueC.Enabled = false;
+                ValueD.Enabled = false;
                 calculate.Enabled = true;
                 choose = 1;
             }
@@ -211,14 +228,16 @@ namespace Funkcje
                 ValueA.Enabled = true;
                 ValueB.Enabled = true;
                 ValueC.Enabled = true;
+                ValueD.Enabled = false;
                 calculate.Enabled = true;
                 choose = 2;
             }
             if (radioButton3.Checked == true)
             {
                 ValueA.Enabled = true;
-                ValueB.Enabled = false;
-                ValueC.Enabled = false;
+                ValueB.Enabled = true;
+                ValueC.Enabled = true;
+                ValueD.Enabled = true;
                 calculate.Enabled = true;
                 choose = 3;
             }
