@@ -34,7 +34,7 @@ namespace Funkcje
         //    return x2;
 
         //}
-        private void calculate_Click(object sender, EventArgs e)
+        private void calculate_Click(object sender, EventArgs e)// sprawdzamy ktory checkbox zaznaczony i liczymy "Y" ktore wrzucamy na grafa. X domyslnie jest od -5 do 5 ale mozna wpisac swoj uzupelniajac (od do)
         {
             if (choose == 2)
             {
@@ -219,7 +219,7 @@ namespace Funkcje
         {
             radioChooser();
         }
-        private void radioChooser()
+        private void radioChooser()// udostepniamy potrzebne pola lub zamazujemy niepotrzebne
         {
             if (radioButton1.Checked == true)
             {
