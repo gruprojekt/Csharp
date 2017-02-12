@@ -14,32 +14,32 @@ namespace WindowsFormsApplication1
 {
     public partial class Form2 : Form
     {
-        TestObj tescik = new TestObj();
-        List<TextBox> listaTextboxow = new List<TextBox>();
-        List<RadioButton> listaradio = new List<RadioButton>();
-        List<CheckBox> listacheck = new List<CheckBox>();
-        string pathob = "";
+        TestObj tescik = new TestObj(); // zmienna lokalna zawierajaca test przed serializacja
+        List<TextBox> listaTextboxow = new List<TextBox>(); //zmienne lokalne
+        List<RadioButton> listaradio = new List<RadioButton>(); // zmienne loklane
+        List<CheckBox> listacheck = new List<CheckBox>(); // zmienne lokalne
+        string pathob = ""; // sciezka do obrazu
         public Form2()
         {
             InitializeComponent();
-            vScrollBar1.Scroll += (sender, e) => { panel1.VerticalScroll.Value = vScrollBar1.Value; };
+            vScrollBar1.Scroll += (sender, e) => { panel1.VerticalScroll.Value = vScrollBar1.Value; }; // dzialajacy scroll
             FormClosing += Form2_FormClosing;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int x = 0;
+            int x = 0;// wspolrzedne umieszczenia kolejnych textboxow
             int y = 0;
-            int n = Decimal.ToInt32(numericUpDown1.Value);
-            tescik.ListaPytan.Add(textBox1.Text);
-            tescik.Obraz.Add(checkBox1.Checked);
-            tescik.JednaOdpowiedz.Add(checkBox2.Checked);
+            int n = Decimal.ToInt32(numericUpDown1.Value); // ile odpowiedzi
+            tescik.ListaPytan.Add(textBox1.Text); // dodajemy pytanie do lokalnej listy
+            tescik.Obraz.Add(checkBox1.Checked); // boolowskie jest obraz czy nie
+            tescik.JednaOdpowiedz.Add(checkBox2.Checked); // boolowskie czy jedna odpowiedz
             panel1.AutoScroll = false;
             panel1.HorizontalScroll.Enabled = false;
             panel1.HorizontalScroll.Visible = false;
             panel1.HorizontalScroll.Maximum = 0;
             panel1.AutoScroll = true;
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < n; i++) // tworzymy odpo
             {
                 Point polozenie_textboxa = new Point(x, y);
                 listaTextboxow.Add(new TextBox());
@@ -78,9 +78,9 @@ namespace WindowsFormsApplication1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            tescik.ListaPoprawnych.Add(new List<bool>());
+            tescik.ListaPoprawnych.Add(new List<bool>()); 
             tescik.ListaOdpowiedzi.Add(new List<string>());
-            if (tescik.Obraz[tescik.ListaPytan.Count-1]==true)
+            if (tescik.Obraz[tescik.ListaPytan.Count-1]==true) // jesli true to dodajemy sciezke obrazu
             {
                 tescik.PathList.Add(pathob); 
             }
@@ -90,10 +90,10 @@ namespace WindowsFormsApplication1
             }
             for (int i = 0; i < listaTextboxow.Count; i++)
             {
-                tescik.ListaOdpowiedzi[tescik.ListaPytan.Count - 1].Add(listaTextboxow[i].Text);
+                tescik.ListaOdpowiedzi[tescik.ListaPytan.Count - 1].Add(listaTextboxow[i].Text); // dodajemy odpowiedzi do listy odpowiedzi
                 if (tescik.JednaOdpowiedz[tescik.ListaPytan.Count - 1] == true)
                 {
-                    tescik.ListaPoprawnych[tescik.ListaPytan.Count - 1].Add(listaradio[i].Checked);
+                    tescik.ListaPoprawnych[tescik.ListaPytan.Count - 1].Add(listaradio[i].Checked); // lista poprawnych to boolowskie true czy false // odpowiada indeksami pytanią
                 }
                 else
                 {
@@ -108,7 +108,7 @@ namespace WindowsFormsApplication1
             button4.Enabled = true;
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e) // czyscimy i inne kosmetyczne sprawy dla nastepnego pytania
         {
             textBox1.Clear();
             listaTextboxow.Clear();
@@ -124,7 +124,7 @@ namespace WindowsFormsApplication1
             button3.Enabled = false;
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e) // wrzucamy dane do obiektu i go serializujemy
         {
             if (checkBox3.Checked == true)
             {
@@ -150,7 +150,7 @@ namespace WindowsFormsApplication1
                 asd.Show();
             }
         }
-        private void Form2_FormClosing(object sender, FormClosingEventArgs e)
+        private void Form2_FormClosing(object sender, FormClosingEventArgs e) // potrzebne do poprawnego zamykania aplikacji
         {
             if (e.CloseReason == CloseReason.UserClosing)
             {
@@ -163,7 +163,7 @@ namespace WindowsFormsApplication1
 
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e) // dodawanie sciezki pliku obrazu
         {
             OpenFileDialog dlg = new OpenFileDialog();
 

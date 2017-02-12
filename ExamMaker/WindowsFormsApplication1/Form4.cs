@@ -12,12 +12,12 @@ namespace WindowsFormsApplication1
     {
         TestObj Test = new TestObj();
         int numer = 1;
-        List<int> listaUzytych = new List<int>();
-        List<int> listaPotrzebna = new List<int>();
+        List<int> listaUzytych = new List<int>();// lista potrzebna do zabawy indeksami. Ta zawiera liste uzytych juz indeksow potrzebną dla funkcji ktora mi wyrzuca liczby randomowe
+        List<int> listaPotrzebna = new List<int>();//a ta lista zawiera wymieszane indeksy ,dzieki powyzszej liscie i odpowiedniej funkcji indeksy sie nie potwarzaja
         List<Label> listalabel = new List<Label>();
         List<RadioButton> listaradio = new List<RadioButton>();
         List<CheckBox> listacheck = new List<CheckBox>();
-        List<List<bool>> listauzytkownika = new List<List<bool>>();
+        List<List<bool>> listauzytkownika = new List<List<bool>>();//zmienne lokalne
         int poprawne = 0;
         int wszystkiepoprawne = 0;
         public Form4()
@@ -32,7 +32,7 @@ namespace WindowsFormsApplication1
             panel1.AutoScroll = true;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)// otwieramy test (kod jest owiele bardziej rozwiniety po dodaniu opcji mieszania) zrobilem to aby nie musiec kombinowac w klasie. Mieszamy lokalnie.
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Filter = "(*.xml) | *.xml";
@@ -131,14 +131,14 @@ namespace WindowsFormsApplication1
 
 
         }
-        private void Form4_FormClosing(object sender, FormClosingEventArgs e)
+        private void Form4_FormClosing(object sender, FormClosingEventArgs e)// zamykanie
         {
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 Application.Exit();
             }
         }
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)// kod bardziej rozbudowany przez opcje mieszania, nastepne pytanie
         {
             listauzytkownika.Add(new List<bool>());
             if (Test.isQuestionMixed == false)
@@ -304,7 +304,7 @@ namespace WindowsFormsApplication1
                 }
             }
         }
-        public int Shuffle(int a)
+        public int Shuffle(int a)//funkcja ktora wyrzuca liczbe randomową nie potwarzająca sie indeksach (a to ilosc pytan)
         { 
                 Random rnd = new Random();
                 int liczba = 0;
@@ -320,7 +320,7 @@ namespace WindowsFormsApplication1
                 }
             return liczba;
         }
-        public void FillList(int a)
+        public void FillList(int a)// tutaj wypelniamy liste indeksow aby moc w innej kolejnosci wyrzucac pytania
         {
             for (int i = 0; i < a; i++)
             {

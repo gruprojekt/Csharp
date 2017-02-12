@@ -14,16 +14,16 @@ namespace WindowsFormsApplication1
 {
     public partial class Form3 : Form
     {
-        TestObj Test = new TestObj();
+        TestObj Test = new TestObj(); // pusty test czekajacy na dane
         int numer = 1;
         List<TextBox> listaTextboxow = new List<TextBox>();
         List<RadioButton> listaradio = new List<RadioButton>();
-        List<CheckBox> listacheck = new List<CheckBox>();
+        List<CheckBox> listacheck = new List<CheckBox>(); // lokalne zmienne 
         public Form3()
         {
             InitializeComponent();
             FormClosing += Form3_FormClosing;
-            vScrollBar1.Scroll += (sender, e) => { panel1.VerticalScroll.Value = vScrollBar1.Value; };
+            vScrollBar1.Scroll += (sender, e) => { panel1.VerticalScroll.Value = vScrollBar1.Value; }; // poprawnie dzialajacy scroll
             panel1.AutoScroll = false;
             panel1.HorizontalScroll.Enabled = false;
             panel1.HorizontalScroll.Visible = false;
@@ -31,7 +31,7 @@ namespace WindowsFormsApplication1
             panel1.AutoScroll = true;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e) // otwieramy xml z zserializowanym obiektem
         {
       
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
@@ -46,10 +46,10 @@ namespace WindowsFormsApplication1
                 Test = (TestObj)serializer.Deserialize(r);
                 r.Close();
                 int x = 0;
-                int y = 0;
+                int y = 0;// wspolrzedne tworzenia 
                 label2.Text = numer.ToString();
                 textBox1.Text = Test.ListaPytan[numer - 1];
-                for (int i = 0; i < Test.ListaOdpowiedzi[numer - 1].Count(); i++)
+                for (int i = 0; i < Test.ListaOdpowiedzi[numer - 1].Count(); i++) // wrzucamy odpowiedzi
                 {
                     Point polozenie_textboxa = new Point(x, y);
                     listaTextboxow.Add(new TextBox());
@@ -92,7 +92,7 @@ namespace WindowsFormsApplication1
            
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)// zapisujemy zmiany w lokalnych zmieniach
         {
 
             for (int i = 0; i < listaTextboxow.Count; i++)
@@ -115,7 +115,7 @@ namespace WindowsFormsApplication1
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)// nastepne pytanie
         {
             if ((numer+1) <= Test.ListaPytan.Count())
             {
@@ -170,7 +170,7 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)// zapisujemy
         {
             if (checkBox1.Checked == true)
             {
@@ -196,7 +196,7 @@ namespace WindowsFormsApplication1
                 asd.Show();
             }
         }
-        private void Form3_FormClosing(object sender, FormClosingEventArgs e)
+        private void Form3_FormClosing(object sender, FormClosingEventArgs e)//poprawne zamykanie
         {
             if (e.CloseReason == CloseReason.UserClosing)
             {

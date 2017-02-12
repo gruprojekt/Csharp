@@ -15,32 +15,32 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
-            FormClosing += Form3_FormClosing;
+            FormClosing += Form3_FormClosing; // event odpowiadajacy za poprawne zamykanie aplikacji po kliknięciu X w innych formach
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Visible = false;
+            this.Visible = false; // znika form1
             Form2 FormaDruga = new Form2();
-            FormaDruga.Show();
+            FormaDruga.Show();//pojawia sie form2
         }
 
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Visible = false;
-            Form3 FormaTrzecia = new Form3();
+            this.Visible = false; // jw
+            Form3 FormaTrzecia = new Form3(); 
             FormaTrzecia.Show();
         }
         private void MyForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (Application.OpenForms.Count == 0) Application.Exit();
+            if (Application.OpenForms.Count == 0) Application.Exit(); // jesli formy pozamykanie to aplikacja sie wylacza
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             this.Visible = false;
-            Form4 FormaCzwarta = new Form4();
+            Form4 FormaCzwarta = new Form4(); // jw
             FormaCzwarta.Show();
         }
         private void Form3_FormClosing(object sender, FormClosingEventArgs e)
