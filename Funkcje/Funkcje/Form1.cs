@@ -15,6 +15,7 @@ namespace Funkcje
         public Form1()
         {
             InitializeComponent();
+            chart1.Series["quadGraph"].IsVisibleInLegend = false;
         }
         static double choose = 0;
         private void Form1_Load(object sender, EventArgs e)
@@ -40,6 +41,7 @@ namespace Funkcje
             {
                 chart1.Series["quadGraph"].Points.Clear();
                 chart1.Series["quadGraph"].Color = Color.Red;
+                //chart1.Series["quadGraph"].
                 double numberA = 0;
                 double numberB = 0;
                 double numberC = 0;
@@ -223,30 +225,86 @@ namespace Funkcje
         {
             if (radioButton1.Checked == true)
             {
-                ValueA.Enabled = true;
-                ValueB.Enabled = true;
-                ValueC.Enabled = false;
-                ValueD.Enabled = false;
+                ValueA.Visible = true;
+                label2.Visible = true;
+
+                ValueB.Visible = true;
+                label3.Visible = true;
+
+                ValueC.Visible = false;
+                label4.Visible = false;
+
+                ValueD.Visible = false;
+                label7.Visible = false;
+
                 calculate.Enabled = true;
                 choose = 1;
             }
             if (radioButton2.Checked == true)
             {
-                ValueA.Enabled = true;
-                ValueB.Enabled = true;
-                ValueC.Enabled = true;
-                ValueD.Enabled = false;
+                ValueA.Visible = true;
+                label2.Visible = true;
+
+                ValueB.Visible = true;
+                label3.Visible = true;
+
+                ValueC.Visible = true;
+                label4.Visible = true;
+
+                ValueD.Visible = false;
+                label7.Visible = false;
+
                 calculate.Enabled = true;
                 choose = 2;
             }
             if (radioButton3.Checked == true)
             {
-                ValueA.Enabled = true;
-                ValueB.Enabled = true;
-                ValueC.Enabled = true;
-                ValueD.Enabled = true;
+                ValueA.Visible = true;
+                label2.Visible = true;
+
+                ValueB.Visible = true;
+                label3.Visible = true;
+
+                ValueC.Visible = true;
+                label4.Visible = true;
+
+                ValueD.Visible = true;
+                label7.Visible = true;
+
                 calculate.Enabled = true;
                 choose = 3;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SaveFileDialog dialog = new SaveFileDialog();
+                dialog.Filter = "(*.png)|*.png";
+                dialog.ShowDialog();
+                chart1.SaveImage(dialog.FileName,System.Drawing.Imaging.ImageFormat.Png);
+            }
+            catch
+            {
+                MessageBox.Show("Nie udało się zapisać grafu");
+            }
+        }
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+
+            base.OnFormClosing(e);
+
+            if (e.CloseReason == CloseReason.WindowsShutDown) return;
+
+            // Confirm user wants to close
+            switch (MessageBox.Show(this, "Jeżeli nie zapisałeś postępów, mogą zostać utracone. Napewno chcesz zakończyć?", "Zamykanie aplikacji !", MessageBoxButtons.YesNo))
+            {
+                case DialogResult.No:
+                    e.Cancel = true;
+                    break;
+                default:
+                    break;
             }
         }
     }
